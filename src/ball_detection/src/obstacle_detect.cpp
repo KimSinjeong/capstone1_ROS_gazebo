@@ -47,7 +47,7 @@ int spincounter = 0;
 // Global variable
 sensor_msgs::PointCloud2 msg_cloud;
 
-PointCloud::Ptr result(new PointCloud), target;
+PointCloud::Ptr result(new PointCloud), target, accumulated_result(new PointCloud);
 Eigen::Matrix4f GlobalTransform = Eigen::Matrix4f::Identity(), pairTransform;
 
 // Define a new point representation for < x, y, z, curvature >
@@ -133,7 +133,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
     reg.setTransformationEpsilon(1e-6);
     // Set the maximum distance between two correspondences (src<->tgt) to 10cm
     // Note: adjust this based on the size of your datasets
-    reg.setMaxCorrespondenceDistance(0.1);
+    reg.setMaxCorrespondenceDistance(2.0);
     // Set the point representation
     reg.setPointRepresentation(boost::make_shared<const MyPointRepresentation>(point_representation));
 
@@ -145,7 +145,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
     Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
     PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
     reg.setMaximumIterations(2);
-    for (int i = 0; i < 30; ++i)
+    for (int i = 0; i < 50; ++i)
     {
         // save cloud for visualization purpose
         points_with_normals_src = reg_result;
@@ -226,20 +226,24 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     extract.setNegative(true);
     extract.filter(*cloud);
 
-    //if (::target->points.size()) {
     if (::target) {
-        PointCloud::Ptr temp(new PointCloud);
+    	PointCloud::Ptr temp(new PointCloud);
         pairAlign(cloud, ::target, temp, pairTransform, true);
         pcl::transformPointCloud(*temp, *result, GlobalTransform);
         GlobalTransform *= pairTransform;
+    	
+	//pcl::transformPointCloud(*::target, *temp, GlobalTransform.inverse());
+    	//*accumulated_result += *temp;
     }
 
     // Coonvert PCL type to sensor_msgs/PointCloud2 type
     pcl::toROSMsg(*result, msg_cloud);
+    //pcl::toROSMsg(*accumulated_result, msg_cloud);
 
     ::target = cloud;
 
     cloud.reset(new PointCloud);
+    cout << GlobalTransform << endl;
 }
 
 int main (int argc, char **argv) {
