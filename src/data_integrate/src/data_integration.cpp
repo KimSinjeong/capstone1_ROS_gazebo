@@ -51,13 +51,11 @@ int n;
 
 #define RAD2DEG(x) ((x)*180./M_PI)
 
-
-
 void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
-		map_mutex.lock();
+	map_mutex.lock();
 
-		int count = scan->angle_max / scan->angle_increment;
+	int count = scan->angle_max / scan->angle_increment;
     lidar_size=count;
     for(int i = 0; i < count; i++)
     {
@@ -65,8 +63,7 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
         lidar_distance[i]=scan->ranges[i];
 
     }
-		map_mutex.unlock();
-
+	map_mutex.unlock();
 }
 void camera_Callback(const core_msgs::ball_position::ConstPtr& position)
 {
@@ -92,35 +89,32 @@ int main(int argc, char **argv)
 
     ros::Subscriber sub = n.subscribe<sensor_msgs::LaserScan>("/scan", 1000, lidar_Callback);
     ros::Subscriber sub1 = n.subscribe<core_msgs::ball_position>("/position", 1000, camera_Callback);
-		ros::Publisher pub_left_wheel= n.advertise<std_msgs::Float64>("/turtlebot3_waffle_sim/left_wheel_velocity_controller/command", 10);
-		ros::Publisher pub_right_wheel= n.advertise<std_msgs::Float64>("/turtlebot3_waffle_sim/right_wheel_velocity_controller/command", 10);
-
-
+	ros::Publisher pub_left_wheel= n.advertise<std_msgs::Float64>("/turtlebot3_waffle_sim/left_wheel_velocity_controller/command", 10);
+	ros::Publisher pub_right_wheel= n.advertise<std_msgs::Float64>("/turtlebot3_waffle_sim/right_wheel_velocity_controller/command", 10);
 
     while(ros::ok){
-			std_msgs::Float64 left_wheel_msg;
-			std_msgs::Float64 right_wheel_msg;
+		std_msgs::Float64 left_wheel_msg;
+		std_msgs::Float64 right_wheel_msg;
 
-			left_wheel_msg.data=1;   // set left_wheel velocity
-			right_wheel_msg.data=1;  // set right_wheel velocity
+		left_wheel_msg.data=1;   // set left_wheel velocity
+		right_wheel_msg.data=1;  // set right_wheel velocity
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		// // 각노드에서 받아오는 센서 테이터가 잘 받아 왔는지 확인하는 코드 (ctrl + /)을 눌러 주석을 추가/제거할수 있다.///
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 
-	 //  for(int i = 0; i < lidar_size; i++
-   // {
-	 //    std::cout << "degree : "<< lidar_degree[i];
-	 //    std::cout << "   distance : "<< lidar_distance[i]<<std::endl;
-	 //  }
+	 	//  for(int i = 0; i < lidar_size; i++
+   		// {
+	 	//    std::cout << "degree : "<< lidar_degree[i];
+	 	//    std::cout << "   distance : "<< lidar_distance[i]<<std::endl;
+	 	//  }
 		// for(int i = 0; i < ball_number; i++)
 		// {
 		// 	std::cout << "ball_X : "<< ball_X[i];
 		// 	std::cout << "ball_Y : "<< ball_Y[i]<<std::endl;
-   //
 		// }
 
-		  pub_left_wheel.publish(left_wheel_msg);   // publish left_wheel velocity
-		  pub_right_wheel.publish(right_wheel_msg);  // publish right_wheel velocity
+		pub_left_wheel.publish(left_wheel_msg);   // publish left_wheel velocity
+		pub_right_wheel.publish(right_wheel_msg);  // publish right_wheel velocity
 
 	    ros::Duration(0.025).sleep();
 	    ros::spinOnce();

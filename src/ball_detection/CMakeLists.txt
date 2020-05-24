@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   core_msgs
+  pcl_ros
+  pcl_conversions
   image_transport
   message_generation
   visualization_msgs
@@ -48,4 +50,11 @@ add_dependencies(line_detect_node core_msgs_generate_messages_cpp)
 
 target_link_libraries(line_detect_node
   ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
+)
+
+add_executable(obstacle_detect_node src/obstacle_detect.cpp)
+add_dependencies(obstacle_detect_node core_msgs_generate_messages_cpp)
+
+target_link_libraries(obstacle_detect_node
+  ${catkin_LIBRARIES} ${OpenCV_LIBS}
 )
