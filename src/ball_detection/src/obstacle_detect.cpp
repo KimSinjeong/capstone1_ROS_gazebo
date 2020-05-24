@@ -182,7 +182,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 
 void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
-    if (spincounter++ % 100 != 0) {
+    if (spincounter++ % 5 != 0) {
         return;
     }
     // angle in radian
@@ -226,16 +226,18 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     extract.setNegative(true);
     extract.filter(*cloud);
 
-    if (::target->points.size()) {
+    //if (::target->points.size()) {
+    if (::target) {
         PointCloud::Ptr temp(new PointCloud);
-
         pairAlign(cloud, ::target, temp, pairTransform, true);
         pcl::transformPointCloud(*temp, *result, GlobalTransform);
         GlobalTransform *= pairTransform;
     }
 
     // Coonvert PCL type to sensor_msgs/PointCloud2 type
-    pcl::toROSMsg(*::result, msg_cloud);
+    pcl::toROSMsg(*result, msg_cloud);
+
+    ::target = cloud;
 
     cloud.reset(new PointCloud);
 }
