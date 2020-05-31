@@ -80,9 +80,11 @@ public:
 
 void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
+	/*
     if (spincounter++ % 3 != 0) {
 	    return;
     }
+    */
     // angle in radian
     float angle_min = scan->angle_min;
     float angle_max = scan->angle_max;
@@ -140,7 +142,6 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
         std::cout << "has converged:" << icp.hasConverged() << " score: " << icp.getFitnessScore() << std::endl;
         
         pairTransform = icp.getFinalTransformation();
-        std::cout << pairTransform << std::endl;
 
         pcl::transformPointCloud(*cloud, *temp, pairTransform.inverse());
         GlobalTransform = GlobalTransform * pairTransform;
@@ -150,11 +151,11 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
         // Coonvert PCL type to sensor_msgs/PointCloud2 type
         pcl::toROSMsg(*::target, msg_cloud);
 
-        // Extract 20% of total points to prevent too many points
+        // Extract 10% of total points to prevent too many points
         pcl::PointIndices::Ptr random_points(new pcl::PointIndices());
         len = ::target->size(); /* number of target */
         for(int i = 0; i < len; i++){
-            if (die(mersenne) <= 2) {
+            if (die(mersenne) <= 1) {
                 random_points->indices.push_back(i);
             }
         }
@@ -165,7 +166,12 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     }
 
     cloud.reset(new PointCloud);
-    cout << GlobalTransform << endl;
+    std::cout << "Transformation mtx" << std::endl;
+
+    Eigen::Matrix4f invglobal = GlobalTransform.inverse();
+    cout << invglobal << endl;
+
+    std::cout << "Robot pose (x, y, theta) : " << invglobal(0, 3) << ", " << invglobal(1, 3) << ", " << atan(invglobal(1, 0)/((invglobal(0, 0)!=0.0)?invglobal(0, 0):1e-14)) << std::endl;
 }
 
 int main (int argc, char **argv) {
