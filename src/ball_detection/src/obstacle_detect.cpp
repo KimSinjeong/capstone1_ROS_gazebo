@@ -138,7 +138,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
     reg.setTransformationEpsilon(1e-6);
     // Set the maximum distance between two correspondences (src<->tgt) to 10cm
     // Note: adjust this based on the size of your datasets
-    reg.setMaxCorrespondenceDistance(2.0);
+    reg.setMaxCorrespondenceDistance(1.5);
     // Set the point representation
     reg.setPointRepresentation(boost::make_shared<const MyPointRepresentation>(point_representation));
 
@@ -149,8 +149,8 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
     // Run the same optimization in a loop and visualize the results
     Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
     PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
-    reg.setMaximumIterations(2);
-    for (int i = 0; i < 30; ++i)
+    reg.setMaximumIterations(10);
+    for (int i = 0; i < 2; ++i)
     {
         // save cloud for visualization purpose
         points_with_normals_src = reg_result;
@@ -187,6 +187,9 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 
 void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
+    if (spincounter++ % 3 != 0) {
+	return;
+    }
     // angle in radian
     float angle_min = scan->angle_min;
     float angle_max = scan->angle_max;
@@ -239,11 +242,11 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
         // Coonvert PCL type to sensor_msgs/PointCloud2 type
         pcl::toROSMsg(*::target, msg_cloud);
 
-        // Extract 10% of total points to prevent too many points
+        // Extract 20% of total points to prevent too many points
         pcl::PointIndices::Ptr random_points(new pcl::PointIndices());
         len = ::target->size(); /* number of target */
         for(int i = 0; i < len; i++){
-            if (die(mersenne) <= 1) {
+            if (die(mersenne) <= 3) {
                 random_points->indices.push_back(i);
             }
         }
@@ -260,7 +263,7 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 int main (int argc, char **argv) {
     ros::init (argc, argv, "obstacle_detect_node");
     ros::NodeHandle nh;
-    ros::Subscriber sub2 = nh.subscribe<sensor_msgs::LaserScan>("/scan", 1000, lidar_Callback);
+    ros::Subscriber sub2 = nh.subscribe<sensor_msgs::LaserScan>("/scan", 10, lidar_Callback);
     ros::Publisher pub_cloud = nh.advertise<sensor_msgs::PointCloud2>("/accumulated_cloud", 1);
 
     ros::Rate loop_rate(5);
