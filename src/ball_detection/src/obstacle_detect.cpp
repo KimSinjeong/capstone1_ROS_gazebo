@@ -175,7 +175,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
     pcl::transformPointCloud(*cloud_tgt, *output, targetToSource);
 
     //add the source to the transformed target
-    *output += *cloud_src;
+    // *output += *cloud_src;
 
     final_transform = targetToSource;
 }
@@ -226,21 +226,19 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     extract.setNegative(true);
     extract.filter(*cloud);
 
-    if (::target) {
-    	PointCloud::Ptr temp(new PointCloud);
-        pairAlign(cloud, ::target, temp, pairTransform, true);
-        pcl::transformPointCloud(*temp, *result, GlobalTransform);
-        GlobalTransform *= pairTransform;
-    	
-	//pcl::transformPointCloud(*::target, *temp, GlobalTransform.inverse());
-    	//*accumulated_result += *temp;
+    if (!::target) {
+        ::target = cloud;
     }
+    else {
+        PointCloud::Ptr temp(new PointCloud);
+        pairAlign(::target, cloud, temp, GlobalTransform, true);
+        //GlobalTransform *= pairTransform;
 
-    // Coonvert PCL type to sensor_msgs/PointCloud2 type
-    pcl::toROSMsg(*result, msg_cloud);
-    //pcl::toROSMsg(*accumulated_result, msg_cloud);
+        *target += *temp;
 
-    ::target = cloud;
+        // Coonvert PCL type to sensor_msgs/PointCloud2 type
+        pcl::toROSMsg(*target, msg_cloud);
+    }
 
     cloud.reset(new PointCloud);
     cout << GlobalTransform << endl;
