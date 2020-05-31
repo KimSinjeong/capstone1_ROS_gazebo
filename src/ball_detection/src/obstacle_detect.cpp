@@ -171,7 +171,22 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     Eigen::Matrix4f invglobal = GlobalTransform.inverse();
     cout << invglobal << endl;
 
-    std::cout << "Robot pose (x, y, theta) : " << invglobal(0, 3) << ", " << invglobal(1, 3) << ", " << atan(invglobal(1, 0)/((invglobal(0, 0)!=0.0)?invglobal(0, 0):1e-14)) << std::endl;
+    float robotangle;
+    if (invglobal(0, 0) == 0.) {
+        robotangle = (invglobal(1, 0) > 0)?(3.1415926/2):(-3.1415926/2);
+    } else if (invglobal(0, 0) < 0.) {
+        if (invglobal(1, 0) > 0.) {
+            robotangle = atan(invglobal(1, 0)/invglobal(0, 0)) + 3.1415926;
+        } else if (invglobal(1, 0) < 0.) {
+            robotangle = atan(invglobal(1, 0)/invglobal(0, 0)) - 3.1415926;
+        } else {
+            robotangle = 3.1415926;
+        }
+    } else {
+        robotangle = atan(invglobal(1, 0)/invglobal(0, 0));
+    }
+
+    std::cout << "Robot pose (x, y, theta) : " << invglobal(0, 3) << ", " << invglobal(1, 3) << ", " << robotangle << std::endl;
 }
 
 int main (int argc, char **argv) {
