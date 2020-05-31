@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <random>
 
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
@@ -49,6 +50,10 @@ sensor_msgs::PointCloud2 msg_cloud;
 
 PointCloud::Ptr result(new PointCloud), target, accumulated_result(new PointCloud);
 Eigen::Matrix4f GlobalTransform = Eigen::Matrix4f::Identity(), pairTransform;
+
+random_device rd;
+mt19937 mersenne(rd());
+uniform_int_distribution<> die(1, 10);
 
 // Define a new point representation for < x, y, z, curvature >
 class MyPointRepresentation : public pcl::PointRepresentation<PointNormalT>
@@ -145,7 +150,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
     Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
     PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
     reg.setMaximumIterations(2);
-    for (int i = 0; i < 50; ++i)
+    for (int i = 0; i < 30; ++i)
     {
         // save cloud for visualization purpose
         points_with_normals_src = reg_result;
@@ -232,12 +237,23 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     else {
         PointCloud::Ptr temp(new PointCloud);
         pairAlign(::target, cloud, temp, GlobalTransform, true);
-        //GlobalTransform *= pairTransform;
-
-        *target += *temp;
+        *::target += *temp;
 
         // Coonvert PCL type to sensor_msgs/PointCloud2 type
-        pcl::toROSMsg(*target, msg_cloud);
+        pcl::toROSMsg(*::target, msg_cloud);
+
+        // Extract 10% of total points to prevent too many points
+        pcl::PointIndices::Ptr random_points(new pcl::PointIndices());
+        len = ::target->size(); /* number of target */
+        for(int i = 0; i < len; i++){
+            if (die(mersenne) <= 1) {
+                random_points->indices.push_back(i);
+            }
+        }
+        extract.setInputCloud(::target);
+        extract.setIndices(random_points);
+        extract.setNegative(true);
+        extract.filter(*::target);
     }
 
     cloud.reset(new PointCloud);
