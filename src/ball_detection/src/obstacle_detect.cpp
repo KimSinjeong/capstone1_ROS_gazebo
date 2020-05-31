@@ -187,9 +187,6 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 
 void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
-    if (spincounter++ % 5 != 0) {
-        return;
-    }
     // angle in radian
     float angle_min = scan->angle_min;
     float angle_max = scan->angle_max;
