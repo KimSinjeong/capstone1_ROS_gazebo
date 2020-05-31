@@ -218,7 +218,7 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
             cloud->points[i].x = range[i]*cos(angle_temp);
             cloud->points[i].y = range[i]*sin(angle_temp);
             cloud->points[i].z = 0;
-            cloud->points[i] = GlobalTransform * cloud->points[i];
+            //cloud->points[i] = GlobalTransform * cloud->points[i];
         }
         else{
             // indices of infinite distance points
@@ -232,13 +232,15 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
     extract.setNegative(true);
     extract.filter(*cloud);
 
+    pcl::transformPointCloud(*cloud, *cloud, GlobalTransform);
+
     if (!::target) {
         ::target = cloud;
     }
     else {
         PointCloud::Ptr temp(new PointCloud);
         pairAlign(::target, cloud, temp, pairTransform, true);
-        GlobalTransform *= pairTransform;
+        GlobalTransform = pairTransform*GlobalTransform;
         *::target += *temp;
 
         // Coonvert PCL type to sensor_msgs/PointCloud2 type
