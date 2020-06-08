@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ball_detection)
+project(line_tracing)
 add_compile_options(-std=c++11)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -12,15 +12,11 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   core_msgs
-  pcl_ros
-  pcl_conversions
   image_transport
-  message_generation
-  visualization_msgs
+  cv_bridge
 )
 
 find_package( OpenCV REQUIRED )
-find_package( cv_bridge REQUIRED )
 
 catkin_package(
 #  INCLUDE_DIRS include
@@ -32,29 +28,25 @@ catkin_package(
 #  visualization_msgs
 #  DEPENDS system_lib
 )
+
 include_directories(
   ${OpenCV_INCLUDE_DIRS}
   ${cv_bridge_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
   #include
 )
-add_executable(ball_detect_node src/ball_detect.cpp)
-add_dependencies(ball_detect_node core_msgs_generate_messages_cpp)
 
-target_link_libraries(ball_detect_node
+add_executable(line_detect_node src/line_detect.cpp)
+# add_dependencies(line_detect_node core_msgs_generate_messages_cpp)
+
+target_link_libraries(line_detect_node
   ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
 )
 
-#add_executable(line_detect_node src/line_detect.cpp)
-#add_dependencies(line_detect_node core_msgs_generate_messages_cpp)
 
-#target_link_libraries(line_detect_node
-#  ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
-#)
+add_executable(line_detect_actuation src/line_detect_actuation.cpp)
+# add_dependencies(line_detect_actuation core_msgs_generate_messages_cpp)
 
-add_executable(obstacle_detect_node src/obstacle_detect.cpp)
-add_dependencies(obstacle_detect_node core_msgs_generate_messages_cpp)
-
-target_link_libraries(obstacle_detect_node
-  ${catkin_LIBRARIES} ${OpenCV_LIBS}
+target_link_libraries(line_detect_actuation
+  ${catkin_LIBRARIES} ${cv_bridge_LIBRARIES}
 )
