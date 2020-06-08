@@ -18,11 +18,12 @@ std_msgs::Float64 left_front;
 std_msgs::Float64 left_rear;
 std_msgs::Float64 right_rear;
 
-int correct=0;
+int correct = 0;
 
+bool isenabled = true;
 
-void decision_center(const core_msgs::line_segments::ConstPtr& msg)
-{
+void decision_center(const core_msgs::line_segments::ConstPtr& msg) {
+    if (!isenabled) return;
     int count; //this is the number of actual data points received
     int array_size = msg->size;
 
@@ -90,9 +91,6 @@ void decision_center(const core_msgs::line_segments::ConstPtr& msg)
         cout << left_front.data << "    " << right_front.data << "    " << right_rear.data
             << "    " << left_rear.data << endl;
     }
-
-
-
 }
 
 int main (int argc, char **argv) 
@@ -107,6 +105,18 @@ int main (int argc, char **argv)
     pub_right_rear_wheel = nh.advertise<std_msgs::Float64>("model13/right_rear_wheel_velocity_controller/command", 10);
     pub_left_rear_wheel = nh.advertise<std_msgs::Float64>("model13/left_rear_wheel_velocity_controller/command", 10);
      
-    ros::spin();
+    ros::Rate loop_rate(20);
+
+    while (ros::ok()) {
+        ros::spinOnce();
+        bool entrance_finished;
+        if (nh.getParam("/entrance_finished", entrance_finished) && isenabled) {
+            if (entrance_finished) {
+                isenabled = false;
+            }
+        }
+
+        loop_rate.sleep();
+    }
     return 0;
 }

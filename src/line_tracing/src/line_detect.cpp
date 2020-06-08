@@ -17,7 +17,11 @@ using namespace cv;
 ros::Publisher pub;
 Mat buffer, image_gray, image_binary;
 
+bool isenabled = true;
+
 int thresh = 100;
+
+int nolinecnt = 0;
 
 int thickness = 1;
 int font = FONT_HERSHEY_SIMPLEX;// hand-writing style font
@@ -26,6 +30,8 @@ double fontScale = 0.75;
 Scalar blue(255, 0, 0), red(0, 0, 255), green(0, 255, 0);
 
 void imagegrabber (const sensor_msgs::ImageConstPtr& msg) {
+    if (!isenabled) return;
+
     try {buffer = cv_bridge::toCvShare(msg, "bgr8")->image;} //transfer the image data into buffer
     catch (cv_bridge::Exception& e) {ROS_ERROR("Could not convert from '%s' to 'bgr8'.", msg->encoding.c_str());}
     
@@ -49,6 +55,14 @@ void imagegrabber (const sensor_msgs::ImageConstPtr& msg) {
     pmsg.com_x.resize(contours.size());
     pmsg.com_y.resize(contours.size());
     pmsg.mass.resize(contours.size());
+
+    if ((pmsg.size == 0) && (++nolinecnt == 4)) {
+        ros::param::set("/entrance_finished", true);
+        isenabled = false;
+        return;
+    }
+    if (pmsg.size != 0)
+        nolinecnt = 0;
 
     /// Get the moments, mass centers:
     vector<Moments> mu(contours.size() );
@@ -87,6 +101,19 @@ int main (int argc, char **argv) {
 
     pub = nh.advertise<core_msgs::line_segments>("/segments", 100);
 
+/*
+    ros::Rate loop_rate(20);
+
+    while (ros::ok()) {
+        ros::spinOnce();
+        bool entrance_finished;
+        if (nh.getParam("/entrance_finished", entrance_finished) && isenabled) {
+            if (entrance_finished) {
+                isenabled = false;
+            }
+        }
+    }
+*/
     ros::spin();
     return 0;
 }

@@ -13,6 +13,7 @@ add_message_files( DIRECTORY msg
   ball_position.msg
   multiarray.msg
   line_segments.msg
+  robot_position.msg
 )
 
 ## Generate services in the 'srv' folder

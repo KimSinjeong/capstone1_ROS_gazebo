@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ball_detection)
+project(field_detection)
 add_compile_options(-std=c++11)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -15,12 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_ros
   pcl_conversions
   image_transport
-  message_generation
-  visualization_msgs
+  cv_bridge
 )
 
 find_package( OpenCV REQUIRED )
-find_package( cv_bridge REQUIRED )
 
 catkin_package(
 #  INCLUDE_DIRS include
@@ -29,7 +27,6 @@ catkin_package(
 #  std_msgs
 #  core_msgs
 #  image_transport
-#  visualization_msgs
 #  DEPENDS system_lib
 )
 include_directories(
@@ -45,16 +42,9 @@ target_link_libraries(ball_detect_node
   ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
 )
 
-#add_executable(line_detect_node src/line_detect.cpp)
-#add_dependencies(line_detect_node core_msgs_generate_messages_cpp)
+add_executable(dead_reckoning_node src/dead_reckoning.cpp)
+add_dependencies(dead_reckoning_node core_msgs_generate_messages_cpp)
 
-#target_link_libraries(line_detect_node
-#  ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
-#)
-
-add_executable(obstacle_detect_node src/obstacle_detect.cpp)
-add_dependencies(obstacle_detect_node core_msgs_generate_messages_cpp)
-
-target_link_libraries(obstacle_detect_node
+target_link_libraries(dead_reckoning_node
   ${catkin_LIBRARIES} ${OpenCV_LIBS}
 )

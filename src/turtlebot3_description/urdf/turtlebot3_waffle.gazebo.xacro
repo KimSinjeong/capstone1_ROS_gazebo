@@ -13,8 +13,6 @@
     </plugin>
   </gazebo>
 
-
-
   <gazebo reference="base_link">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
