@@ -27,13 +27,15 @@ map open
 ```
 roslaunch map_generate import_world.launch
 ```
-swapn the robot
+spwan the robot
 ```
 roslaunch turtlebot3_description spawn_turtlebot3.launch
+roslaunch model13 gazebo2.launch
 ```
 launch the controller_manager
 ```
 roslaunch junny_control junny_control.launch
+roslaunch junny_control model13_control.launch
 ```
 steer the robot
 ```
@@ -54,11 +56,14 @@ x: linear velocity decrease
 ```
 detect and publish ball position from camera image
 ```
-rosrun ball_detection ball_detect_node
+rosrun field_detection ball_detect_node
 ```
 draw the lidar data and ball position
 ```
 rosrun data_integrate data_show_node
 ```
-
+run all components at once
+```
+roslaunch data_integrate system_run.launch
+```
 

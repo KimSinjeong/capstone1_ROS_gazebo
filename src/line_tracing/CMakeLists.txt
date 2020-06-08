@@ -37,7 +37,7 @@ include_directories(
 )
 
 add_executable(line_detect_node src/line_detect.cpp)
-# add_dependencies(line_detect_node core_msgs_generate_messages_cpp)
+add_dependencies(line_detect_node core_msgs_generate_messages_cpp)
 
 target_link_libraries(line_detect_node
   ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
@@ -45,7 +45,7 @@ target_link_libraries(line_detect_node
 
 
 add_executable(line_detect_actuation src/line_detect_actuation.cpp)
-# add_dependencies(line_detect_actuation core_msgs_generate_messages_cpp)
+add_dependencies(line_detect_actuation core_msgs_generate_messages_cpp)
 
 target_link_libraries(line_detect_actuation
   ${catkin_LIBRARIES} ${cv_bridge_LIBRARIES}

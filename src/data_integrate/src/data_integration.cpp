@@ -26,6 +26,8 @@
 
 #include "opencv2/opencv.hpp"
 
+#include <pcl/registration/transforms.h>
+
 #define RAD2DEG(x) ((x)*180./M_PI)
 #define sampleFreq	512.0f		// sample frequency in Hz
 #define betaDef		0.1f		// 2 * proportional gain
@@ -207,16 +209,71 @@ void set_vel(float left, float right){
 	vel_right = right;
 }
 
+bool originated = false;
+float data[16];
+Eigen::Matrix4f origin, target;
 
 void global_Callback(const core_msgs::robot_position::ConstPtr& msg){
-	r_pose[0] = msg->x_pos + 3.5;
-	r_pose[1] = msg->y_pos + 0.5;
+	for (int i = 0; i < 16; i++) data[i] = msg->data[i];
+
+	if (data[0] == 0.) {
+        r_theta = (data[4] > 0)?(3.1415926/2):(-3.1415926/2);
+    } else if (data[0] < 0.) {
+        if (data[4] > 0.) {
+            r_theta = atan(data[4]/data[0]) + 3.1415926;
+        } else if (data[4] < 0.) {
+            r_theta = atan(data[4]/data[0]) - 3.1415926;
+        } else {
+            r_theta = 3.1415926;
+        }
+    } else {
+        r_theta = atan(data[4]/data[0]);
+    }
+	r_pose[0] = data[3] + 3.5;
+	r_pose[1] = data[7] + 0.5;
 	r_pose[2] = 0;
-	r_theta = msg->angle;
+
 	std::cout<<"pose"<<std::endl;
 	std::cout<<"x : "<<r_pose[0]<<std::endl;
 	std::cout<<"y : "<<r_pose[1]<<std::endl;
 	std::cout<<"theta = "<<RAD2DEG(r_theta)<<std::endl;
+}
+
+void set_Origin() {
+	originated = true;
+	origin << data[0], data[1], data[2], data[3],
+		data[4], data[5], data[6], data[7],
+		data[8], data[9], data[10], data[11],
+		data[12], data[13], data[14], data[15];
+}
+
+bool get_Target(float pos[3]) {
+	if (!originated) {
+		std::cout << "Original position is not set yet" << std::endl;
+		return false;
+	}
+	target << data[0], data[1], data[2], data[3],
+		data[4], data[5], data[6], data[7],
+		data[8], data[9], data[10], data[11],
+		data[12], data[13], data[14], data[15];
+	
+	target = target*origin.inverse();
+
+	pos[0] = target(0, 3);
+	pos[1] = target(1, 3);
+	if (target(0, 0) == 0.) {
+		pos[2] = (target(1, 0) > 0)?(3.1415926/2):(-3.1415926/2);
+	} else if (target(0, 0) < 0.) {
+		if (target(1, 0) > 0.) {
+			pos[2] = atan(target(1, 0)/target(0, 0)) + 3.1415926;
+		} else if (target(1, 0) < 0.) {
+			pos[2] = atan(target(1, 0)/target(0, 0)) - 3.1415926;
+		} else {
+			pos[2] = 3.1415926;
+		}
+	} else {
+		pos[2] = atan(target(1, 0)/target(0, 0));
+	}
 }
 
 

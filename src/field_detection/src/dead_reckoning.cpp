@@ -193,9 +193,12 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 
 
     if (isenabled) {
-        msg.x_pos = invglobal(0, 3);
-        msg.y_pos = invglobal(1, 3);
-        msg.angle = robotangle;
+        msg.data = {
+            invglobal(0, 0), invglobal(0, 1), invglobal(0, 2), invglobal(0, 3),
+            invglobal(1, 0), invglobal(1, 1), invglobal(1, 2), invglobal(1, 3),
+            invglobal(2, 0), invglobal(2, 1), invglobal(2, 2), invglobal(2, 3),
+            invglobal(3, 0), invglobal(3, 1), invglobal(3, 2), invglobal(3, 3)
+        };
         pub.publish(msg);
     }
     
