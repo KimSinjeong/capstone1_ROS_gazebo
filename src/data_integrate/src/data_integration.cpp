@@ -28,7 +28,7 @@
 
 #include <pcl/registration/transforms.h>
 
-#define RAD2DEG(x) ((x)*180./M_PI)
+// #define RAD2DEG(x) ((x)*180./M_PI)
 #define sampleFreq	512.0f		// sample frequency in Hz
 #define betaDef		0.1f		// 2 * proportional gain
 
@@ -134,8 +134,6 @@ bool rot_left;
 int store_mode;
 
 bool isenabled = false;
-
-#define RAD2DEG(x) ((x)*180./M_PI)
 
 float distance_btw(float x1, float y1, float x2, float y2){
 	return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
