@@ -40,7 +40,7 @@ void imagegrabber (const sensor_msgs::ImageConstPtr& msg) {
     resize(buffer, buffer, Size(width, height));
 
     cvtColor(buffer, image_gray, COLOR_BGR2GRAY);
-    threshold(image_gray, image_binary, 100, 255, THRESH_BINARY);
+    threshold(image_gray, image_binary, 10, 255, THRESH_BINARY);
 
     vector<vector<Point>> contours;
     vector<Vec4i> hierarchy;

@@ -434,10 +434,10 @@ int main(int argc, char **argv)
 	ros::Subscriber sub5 = n.subscribe<core_msgs::robot_position>("/robot_position", 1000, global_Callback);
 	// ros::Publisher pub_left_wheel= n.advertise<std_msgs::Float64>("/turtlebot3_waffle_sim/left_wheel_velocity_controller/command", 10);
 	// ros::Publisher pub_right_wheel= n.advertise<std_msgs::Float64>("/turtlebot3_waffle_sim/right_wheel_velocity_controller/command", 10);
-	ros::Publisher pub_right_front_wheel = n.advertise<std_msgs::Float64>("model13/right_front_wheel_velocity_controller/command", 10);
-    ros::Publisher pub_left_front_wheel = n.advertise<std_msgs::Float64>("model13/left_front_wheel_velocity_controller/command", 10);
-    ros::Publisher pub_right_rear_wheel = n.advertise<std_msgs::Float64>("model13/right_rear_wheel_velocity_controller/command", 10);
-    ros::Publisher pub_left_rear_wheel = n.advertise<std_msgs::Float64>("model13/left_rear_wheel_velocity_controller/command", 10);
+	ros::Publisher pub_right_front_wheel = n.advertise<std_msgs::Float64>("model15/right_front_wheel_velocity_controller/command", 10);
+    ros::Publisher pub_left_front_wheel = n.advertise<std_msgs::Float64>("model15/left_front_wheel_velocity_controller/command", 10);
+    ros::Publisher pub_right_rear_wheel = n.advertise<std_msgs::Float64>("model15/right_rear_wheel_velocity_controller/command", 10);
+    ros::Publisher pub_left_rear_wheel = n.advertise<std_msgs::Float64>("model15/left_rear_wheel_velocity_controller/command", 10);
 
 
     while(ros::ok){

@@ -3,7 +3,14 @@
     <param name="/entrance_finished" value="false" type="bool"/>
     
     <include file="$(find map_generate)/launch/import_world.launch"/>
-    <include file="$(find model15)/launch/gazebo2.launch"/>
+    <include file="$(find model15)/launch/gazebo2.launch">
+        <arg name="x_pos" default="2.8"/>
+        <arg name="y_pos" default="0.5"/>
+        <arg name="z_pos" default="0.8"/>
+        <arg name="roll" default="0"/>
+        <arg name="pitch" default="0"/>
+        <arg name="yaw" default="3.1415926535"/>
+    </include>
     <include file="$(find junny_control)/launch/model15_control.launch"/>
 
     <node pkg='data_integrate' type='data_integration_node' name='data_integration_node' output='screen'/>
