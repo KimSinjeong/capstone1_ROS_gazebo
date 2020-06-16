@@ -218,7 +218,7 @@ int main (int argc, char **argv) {
         ros::spinOnce();
 
         bool entrance_finished;
-        if (nh.getParam("/entrance_finished", entrance_finished) && !isenabled) {
+        if (!isenabled && nh.getParam("/entrance_finished", entrance_finished)) {
             if (entrance_finished) {
                 isenabled = true;
                 GlobalTransform = Eigen::Matrix4f::Identity();

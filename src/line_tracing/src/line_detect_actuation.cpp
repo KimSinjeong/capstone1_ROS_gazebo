@@ -100,17 +100,17 @@ int main (int argc, char **argv)
 
     ros::Subscriber sub = nh.subscribe("/segments", 10, decision_center);
 
-    pub_right_front_wheel = nh.advertise<std_msgs::Float64>("model15/right_front_wheel_velocity_controller/command", 10);
-    pub_left_front_wheel = nh.advertise<std_msgs::Float64>("model15/left_front_wheel_velocity_controller/command", 10);
-    pub_right_rear_wheel = nh.advertise<std_msgs::Float64>("model15/right_rear_wheel_velocity_controller/command", 10);
-    pub_left_rear_wheel = nh.advertise<std_msgs::Float64>("model15/left_rear_wheel_velocity_controller/command", 10);
+    pub_right_front_wheel = nh.advertise<std_msgs::Float64>("model16/right_front_wheel_velocity_controller/command", 10);
+    pub_left_front_wheel = nh.advertise<std_msgs::Float64>("model16/left_front_wheel_velocity_controller/command", 10);
+    pub_right_rear_wheel = nh.advertise<std_msgs::Float64>("model16/right_rear_wheel_velocity_controller/command", 10);
+    pub_left_rear_wheel = nh.advertise<std_msgs::Float64>("model16/left_rear_wheel_velocity_controller/command", 10);
      
     ros::Rate loop_rate(20);
 
     while (ros::ok()) {
         ros::spinOnce();
         bool entrance_finished;
-        if (nh.getParam("/entrance_finished", entrance_finished) && isenabled) {
+        if (isenabled && nh.getParam("/entrance_finished", entrance_finished)) {
             if (entrance_finished) {
                 isenabled = false;
             }

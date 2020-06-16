@@ -97,8 +97,10 @@ int main (int argc, char **argv) {
     ros::init (argc, argv, "line_detect_node");
     ros::NodeHandle nh;
     image_transport::ImageTransport it(nh);
-    image_transport::Subscriber sub = it.subscribe("/camera/rgb/image_raw", 1, imagegrabber);
 
+    sleep(10);
+
+    image_transport::Subscriber sub = it.subscribe("/camera/rgb/image_raw", 1, imagegrabber);
     pub = nh.advertise<core_msgs::line_segments>("/segments", 100);
 
 /*

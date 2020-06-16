@@ -48,3 +48,10 @@ add_dependencies(dead_reckoning_node core_msgs_generate_messages_cpp)
 target_link_libraries(dead_reckoning_node
   ${catkin_LIBRARIES} ${OpenCV_LIBS}
 )
+
+add_executable(ball_detect_top_node src/ball_detect_top.cpp)
+add_dependencies(ball_detect_top_node core_msgs_generate_messages_cpp)
+
+target_link_libraries(ball_detect_top_node
+  ${catkin_LIBRARIES} ${OpenCV_LIBS} ${cv_bridge_LIBRARIES}
+)

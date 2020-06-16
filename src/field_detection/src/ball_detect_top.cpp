@@ -357,13 +357,13 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg) {
 
 int main(int argc, char **argv) {
 
-  ros::init(argc, argv, "ball_detect_node"); //init ros nodd
+  ros::init(argc, argv, "ball_detect_top_node"); //init ros nodd
   ros::NodeHandle nh; //create node handler
   image_transport::ImageTransport it(nh); //create image transport and connect it to node hnalder
-  image_transport::Subscriber sub = it.subscribe("/camera/rgb/image_raw", 1, imageCallback);
-  pub_r = nh.advertise<core_msgs::ball_position>("/position_r", 1); //setting publisher
-  pub_b = nh.advertise<core_msgs::ball_position>("/position_b", 1); //setting publisher
-  pub_g = nh.advertise<core_msgs::ball_position>("/position_g", 1); //setting publisher
+  image_transport::Subscriber sub = it.subscribe("/camera2/rgb/image_raw", 1, imageCallback);
+  pub_r = nh.advertise<core_msgs::ball_position>("/position_r2", 1); //setting publisher
+  pub_b = nh.advertise<core_msgs::ball_position>("/position_b2", 1); //setting publisher
+  pub_g = nh.advertise<core_msgs::ball_position>("/position_g2", 1); //setting publisher
   ros::Rate loop_rate(30);
   //namedWindow("result", WINDOW_NORMAL);
   while(ros::ok()){
