@@ -4,7 +4,7 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
   name="model20" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:arg name="laser_visual"  default="true"/>
+  <xacro:arg name="laser_visual"  default="false"/>
   <xacro:arg name="camera_visual" default="false"/>
   <xacro:arg name="imu_visual"    default="false"/>
 
@@ -1345,12 +1345,12 @@
     <mu2>1.0</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
-<gazebo reference="camera">
+  <gazebo reference="camera">
     <sensor type="depth" name="realsense_R200">
       <always_on>true</always_on>
       <visualize>$(arg camera_visual)</visualize>
       <camera>
-	  <pose>0.04 0 0 1.57 1.57 0</pose>
+	        <pose>0.04 0 0 1.57 1.57 0</pose>
           <horizontal_fov>1.3439</horizontal_fov>
           <image>
               <width>1920</width>
@@ -1394,7 +1394,7 @@
       <always_on>true</always_on>
       <visualize>$(arg camera_visual)</visualize>
       <camera>
-	  <pose>0.04 0 0 1.57 1.57 0</pose>
+	        <pose>0.04 0 0 1.57 1.57 0</pose>
           <horizontal_fov>1.3439</horizontal_fov>
           <image>
               <width>1920</width>
@@ -1437,7 +1437,7 @@
     <material>Gazebo/FlatBlack</material>
     <sensor type="ray" name="lds_lfcd_sensor">
       <pose>0 0 0 0 0 0</pose>
-      <!--<visualize>$(arg laser_visual)</visualize>-->
+      <visualize>$(arg laser_visual)</visualize>
       <update_rate>5</update_rate>
       <ray>
         <scan>
