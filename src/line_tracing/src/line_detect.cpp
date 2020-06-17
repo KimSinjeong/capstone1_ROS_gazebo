@@ -39,6 +39,8 @@ void imagegrabber (const sensor_msgs::ImageConstPtr& msg) {
     int height = buffer.size().height*640/buffer.size().width;
     resize(buffer, buffer, Size(width, height));
 
+    buffer = buffer(Range(buffer.size().height/2, buffer.size().height), Range(0, buffer.size().width));
+
     cvtColor(buffer, image_gray, COLOR_BGR2GRAY);
     threshold(image_gray, image_binary, 10, 255, THRESH_BINARY);
 

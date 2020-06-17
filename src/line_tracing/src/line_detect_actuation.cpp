@@ -56,13 +56,13 @@ void decision_center(const core_msgs::line_segments::ConstPtr& msg) {
             correct =1;
             if (error>0){
                 left_front.data = 50; //50
-                right_front.data = -50;//-48
-                left_rear.data=20; //20
+                right_front.data = -45;//-48
+                left_rear.data = 20; //20
                 right_rear.data = -20; //-20
             }
             else{
                 right_front.data = 50;
-                left_front.data = -50;
+                left_front.data = -45;
                 right_rear.data = 20;//chaznge
                 left_rear.data = -20;
             }
