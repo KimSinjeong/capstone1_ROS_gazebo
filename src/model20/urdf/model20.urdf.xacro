@@ -3,8 +3,8 @@
      Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
-  name="model15" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:arg name="laser_visual"  default="false"/>
+  name="model20" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="laser_visual"  default="true"/>
   <xacro:arg name="camera_visual" default="false"/>
   <xacro:arg name="imu_visual"    default="false"/>
 
@@ -25,10 +25,10 @@
         value="2.039657590176" />
       <inertia
         ixx="0.00338395410459643"
-        ixy="-5.22346850738525E-12"
+        ixy="-5.22346855323587E-12"
         ixz="-3.11212901639624E-05"
         iyy="0.00557048223435682"
-        iyz="1.30947753493714E-11"
+        iyz="1.30947753511968E-11"
         izz="0.00865832882623317" />
     </inertial>
     <visual>
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/base_link.STL" />
+          filename="package://model20/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -51,7 +51,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/base_link.STL" />
+          filename="package://model20/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -59,14 +59,14 @@
     name="left_front_wheel_suspension">
     <inertial>
       <origin
-        xyz="0.00153023333982288 -0.00499966029225218 -6.66133814775094E-15"
+        xyz="0.00153023333982283 -0.00499966029225218 -6.7168492989822E-15"
         rpy="0 0 0" />
       <mass
-        value="0.0239463719407108" />
+        value="0.0239463719407107" />
       <inertia
         ixx="1.07207044697232E-06"
-        ixy="-6.56161020907689E-21"
-        ixz="1.99685049324664E-21"
+        ixy="-6.55499276417647E-21"
+        ixz="1.99761000782495E-21"
         iyy="5.97423909283024E-06"
         iyz="-3.86666262269128E-23"
         izz="5.30127484486976E-06" />
@@ -77,7 +77,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_front_wheel_suspension.STL" />
+          filename="package://model20/meshes/left_front_wheel_suspension.STL" />
       </geometry>
       <material
         name="">
@@ -91,7 +91,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_front_wheel_suspension.STL" />
+          filename="package://model20/meshes/left_front_wheel_suspension.STL" />
       </geometry>
     </collision>
   </link>
@@ -123,8 +123,8 @@
         value="0.0411670033844285" />
       <inertia
         ixx="1.15503164126153E-05"
-        ixy="-2.96411876568126E-09"
-        ixz="-1.64845302072257E-08"
+        ixy="-2.96411876568134E-09"
+        ixz="-1.64845302072256E-08"
         iyy="6.93803138202261E-06"
         iyz="1.56454773172921E-07"
         izz="9.57898906372989E-06" />
@@ -135,7 +135,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_front_wheel_motor.STL" />
+          filename="package://model20/meshes/left_front_wheel_motor.STL" />
       </geometry>
       <material
         name="">
@@ -149,7 +149,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_front_wheel_motor.STL" />
+          filename="package://model20/meshes/left_front_wheel_motor.STL" />
       </geometry>
     </collision>
   </link>
@@ -173,16 +173,16 @@
     name="left_front_wheel">
     <inertial>
       <origin
-        xyz="0.0158391990185352 -6.93889390390723E-18 3.1641356201817E-15"
+        xyz="0.0158391990185352 0 3.1641356201817E-15"
         rpy="0 0 0" />
       <mass
         value="0.22822169800504" />
       <inertia
         ixx="0.0007892115763339"
-        ixy="-1.65302974455766E-20"
-        ixz="3.95755131124754E-18"
+        ixy="-1.61861562991134E-20"
+        ixz="3.95792866895153E-18"
         iyy="0.000410429434291421"
-        iyz="-3.84527315454464E-19"
+        iyz="-3.84870078420791E-19"
         izz="0.00041042943429142" />
     </inertial>
     <visual>
@@ -191,7 +191,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_front_wheel.STL" />
+          filename="package://model20/meshes/left_front_wheel.STL" />
       </geometry>
       <material
         name="">
@@ -205,7 +205,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_front_wheel.STL" />
+          filename="package://model20/meshes/left_front_wheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -235,7 +235,7 @@
         value="0.0239463719407107" />
       <inertia
         ixx="1.07207044697232E-06"
-        ixy="-5.89903853842192E-21"
+        ixy="-5.89738417719681E-21"
         ixz="1.70976521885377E-21"
         iyy="5.97423909283023E-06"
         iyz="5.87407071638264E-23"
@@ -247,7 +247,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_front_wheel_suspension.STL" />
+          filename="package://model20/meshes/right_front_wheel_suspension.STL" />
       </geometry>
       <material
         name="">
@@ -261,7 +261,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_front_wheel_suspension.STL" />
+          filename="package://model20/meshes/right_front_wheel_suspension.STL" />
       </geometry>
     </collision>
   </link>
@@ -287,17 +287,17 @@
     name="right_front_wheel_motor">
     <inertial>
       <origin
-        xyz="-2.79575138501104E-05 0.0019490794439902 -0.012936461929631"
+        xyz="-2.79575138501173E-05 0.00194907944399023 -0.012936461929631"
         rpy="0 0 0" />
       <mass
         value="0.0411670033844285" />
       <inertia
         ixx="1.15503164126153E-05"
-        ixy="-2.9641187656836E-09"
-        ixz="-1.64845302071878E-08"
+        ixy="-2.96411876568394E-09"
+        ixz="-1.64845302071881E-08"
         iyy="6.93803138202261E-06"
         iyz="1.56454773172925E-07"
-        izz="9.57898906372989E-06" />
+        izz="9.5789890637299E-06" />
     </inertial>
     <visual>
       <origin
@@ -305,7 +305,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_front_wheel_motor.STL" />
+          filename="package://model20/meshes/right_front_wheel_motor.STL" />
       </geometry>
       <material
         name="">
@@ -319,7 +319,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_front_wheel_motor.STL" />
+          filename="package://model20/meshes/right_front_wheel_motor.STL" />
       </geometry>
     </collision>
   </link>
@@ -343,14 +343,14 @@
     name="right_front_wheel">
     <inertial>
       <origin
-        xyz="0.0158391990185491 1.31838984174237E-16 1.94289029309402E-16"
+        xyz="0.0158391990185491 1.2490009027033E-16 1.94289029309402E-16"
         rpy="0 0 0" />
       <mass
         value="0.22822169800504" />
       <inertia
         ixx="0.0007892115763339"
-        ixy="-1.3297776936908E-20"
-        ixz="-1.31191060294497E-18"
+        ixy="-1.3086845880707E-20"
+        ixz="-1.31197073179041E-18"
         iyy="0.000410429434291421"
         iyz="-3.30739896123204E-19"
         izz="0.00041042943429142" />
@@ -361,7 +361,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_front_wheel.STL" />
+          filename="package://model20/meshes/right_front_wheel.STL" />
       </geometry>
       <material
         name="">
@@ -375,7 +375,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_front_wheel.STL" />
+          filename="package://model20/meshes/right_front_wheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -405,10 +405,10 @@
         value="0.0436119950287125" />
       <inertia
         ixx="4.29479133591148E-06"
-        ixy="8.8579111407478E-10"
-        ixz="1.01813691673353E-09"
+        ixy="8.85791114074875E-10"
+        ixz="1.01813691673291E-09"
         iyy="2.21058141232447E-05"
-        iyz="2.1757968121536E-08"
+        iyz="2.17579681215362E-08"
         izz="2.35707058046399E-05" />
     </inertial>
     <visual>
@@ -417,7 +417,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/camera.STL" />
+          filename="package://model20/meshes/camera.STL" />
       </geometry>
       <material
         name="">
@@ -431,7 +431,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/camera.STL" />
+          filename="package://model20/meshes/camera.STL" />
       </geometry>
     </collision>
   </link>
@@ -452,16 +452,16 @@
     name="myrio">
     <inertial>
       <origin
-        xyz="-5.92450278861234E-05 -0.0201677348757047 0.000391328969376853"
+        xyz="-5.92450278861234E-05 -0.0201677348757047 0.000391328969376881"
         rpy="0 0 0" />
       <mass
         value="0.272795037150939" />
       <inertia
         ixx="0.000426495369649312"
-        ixy="-1.33941181513932E-07"
-        ixz="-1.32777557424162E-06"
+        ixy="-1.33941181513931E-07"
+        ixz="-1.32777557424163E-06"
         iyy="0.000584026336355448"
-        iyz="-9.7817502168308E-08"
+        iyz="-9.78175021683085E-08"
         izz="0.000183119671370759" />
     </inertial>
     <visual>
@@ -470,7 +470,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/myrio.STL" />
+          filename="package://model20/meshes/myrio.STL" />
       </geometry>
       <material
         name="">
@@ -484,7 +484,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/myrio.STL" />
+          filename="package://model20/meshes/myrio.STL" />
       </geometry>
     </collision>
   </link>
@@ -505,17 +505,17 @@
     name="intel">
     <inertial>
       <origin
-        xyz="-5.69397911324709E-05 0.0158670533538898 0.055083544841935"
+        xyz="-5.69397911358849E-05 0.0158670533538911 0.0550835448419378"
         rpy="0 0 0" />
       <mass
-        value="0.399542896482383" />
+        value="0.399542896482345" />
       <inertia
-        ixx="0.000432029127757847"
-        ixy="-1.833831243821E-07"
-        ixz="-3.17164967884077E-07"
-        iyy="0.000836965270422519"
-        iyz="4.77447001747385E-07"
-        izz="0.000473016843887474" />
+        ixx="0.000432029127757804"
+        ixy="-1.83383124401157E-07"
+        ixz="-3.17164967926806E-07"
+        iyy="0.000836965270422433"
+        iyz="4.7744700176345E-07"
+        izz="0.000473016843887417" />
     </inertial>
     <visual>
       <origin
@@ -523,7 +523,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/intel.STL" />
+          filename="package://model20/meshes/intel.STL" />
       </geometry>
       <material
         name="">
@@ -537,7 +537,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/intel.STL" />
+          filename="package://model20/meshes/intel.STL" />
       </geometry>
     </collision>
   </link>
@@ -545,8 +545,8 @@
     name="intel"
     type="fixed">
     <origin
-      xyz="0.20552 -0.10937 -0.025995"
-      rpy="1.5708 -0.0058285 0" />
+      xyz="0.205522597365492 -0.109366659682657 -0.0259953857991605"
+      rpy="1.5707963267949 -0.00582847831492263 0" />
     <parent
       link="base_link" />
     <child
@@ -564,8 +564,8 @@
         value="0.240394331617002" />
       <inertia
         ixx="0.000357684284600866"
-        ixy="-3.61913558197252E-09"
-        ixz="-2.92942384657856E-07"
+        ixy="-3.61913558197348E-09"
+        ixz="-2.92942384657851E-07"
         iyy="0.000746477971691014"
         iyz="4.03533275235886E-06"
         izz="0.000399399110650853" />
@@ -576,7 +576,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/nvidia.STL" />
+          filename="package://model20/meshes/nvidia.STL" />
       </geometry>
       <material
         name="">
@@ -590,7 +590,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/nvidia.STL" />
+          filename="package://model20/meshes/nvidia.STL" />
       </geometry>
     </collision>
   </link>
@@ -598,8 +598,8 @@
     name="nvidia"
     type="fixed">
     <origin
-      xyz="0.41837 -0.19195 0.036381"
-      rpy="-1.5766 0 -1.5708" />
+      xyz="0.418367655264176 -0.191953362348841 0.0363810058695082"
+      rpy="-1.57662480510981 0 -1.5707963267949" />
     <parent
       link="base_link" />
     <child
@@ -611,17 +611,17 @@
     name="pusher ">
     <inertial>
       <origin
-        xyz="1.6791266697791E-05 -0.0504338842827013 -0.00500218320308373"
+        xyz="4.88473400367395E-07 -0.0465265708699117 0.0229929210393978"
         rpy="0 0 0" />
       <mass
-        value="0.295010921800958" />
+        value="0.22688114098655" />
       <inertia
-        ixx="0.000699646991202319"
-        ixy="1.57075731798077E-08"
-        ixz="-1.74299199713213E-09"
-        iyy="0.00218325621057825"
-        iyz="-1.62706054100039E-09"
-        izz="0.00275998123079568" />
+        ixx="0.000430709062315012"
+        ixy="-1.19594594798727E-09"
+        ixz="-5.02913337951274E-12"
+        iyy="0.000930442337810295"
+        iyz="-3.21405921052249E-05"
+        izz="0.00127031110351361" />
     </inertial>
     <visual>
       <origin
@@ -629,7 +629,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/pusher .STL" />
+          filename="package://model20/meshes/pusher .STL" />
       </geometry>
       <material
         name="">
@@ -643,7 +643,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/pusher .STL" />
+          filename="package://model20/meshes/pusher .STL" />
       </geometry>
     </collision>
   </link>
@@ -651,8 +651,8 @@
     name="pusher "
     type="fixed">
     <origin
-      xyz="0.12801 -0.17167 0.0055534"
-      rpy="3.1358 0 1.5708" />
+      xyz="0.12800972713721 -0.171668848940021 0.00555337054790796"
+      rpy="3.13576417527487 0 1.5707963267949" />
     <parent
       link="base_link" />
     <child
@@ -669,17 +669,17 @@
     name="camera2">
     <inertial>
       <origin
-        xyz="0.0517232586747457 0.023709025756193 0.00928761272236953"
+        xyz="0.0517232586747457 0.0237090257561929 0.00928761272236944"
         rpy="0 0 0" />
       <mass
-        value="0.0436119950287125" />
+        value="0.043611995028712" />
       <inertia
-        ixx="4.2947913359115E-06"
-        ixy="8.85791113962356E-10"
-        ixz="1.01813691677876E-09"
-        iyy="2.21058141232445E-05"
-        iyz="2.17579681215356E-08"
-        izz="2.35707058046397E-05" />
+        ixx="4.29479133591139E-06"
+        ixy="8.85791113911591E-10"
+        ixz="1.01813691670325E-09"
+        iyy="2.21058141232439E-05"
+        iyz="2.17579681215329E-08"
+        izz="2.35707058046392E-05" />
     </inertial>
     <visual>
       <origin
@@ -687,7 +687,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/camera2.STL" />
+          filename="package://model20/meshes/camera2.STL" />
       </geometry>
       <material
         name="">
@@ -701,7 +701,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/camera2.STL" />
+          filename="package://model20/meshes/camera2.STL" />
       </geometry>
     </collision>
   </link>
@@ -709,8 +709,8 @@
     name="camera2"
     type="fixed">
     <origin
-      xyz="0.12829 -0.12117 0.18555"
-      rpy="-1.5708 0 -1.5708" />
+      xyz="0.128289598080188 -0.121173837611466 0.185553692755398"
+      rpy="-1.15 0 -1.5707963267949" />
     <parent
       link="base_link" />
     <child
@@ -728,7 +728,7 @@
         value="0.0239463719407108" />
       <inertia
         ixx="1.07207044697232E-06"
-        ixy="7.45579245124671E-21"
+        ixy="7.44255756144587E-21"
         ixz="8.65760519950511E-22"
         iyy="5.97423909283024E-06"
         iyz="1.21340967670127E-22"
@@ -740,7 +740,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_rear_wheel_suspension.STL" />
+          filename="package://model20/meshes/left_rear_wheel_suspension.STL" />
       </geometry>
       <material
         name="">
@@ -754,7 +754,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_rear_wheel_suspension.STL" />
+          filename="package://model20/meshes/left_rear_wheel_suspension.STL" />
       </geometry>
     </collision>
   </link>
@@ -780,14 +780,14 @@
     name="left_rear_wheel_motor">
     <inertial>
       <origin
-        xyz="-2.79575138500548E-05 0.0019490794439902 -0.0129364619296177"
+        xyz="-2.79575138500618E-05 0.0019490794439902 -0.0129364619296177"
         rpy="0 0 0" />
       <mass
-        value="0.0411670033844285" />
+        value="0.0411670033844286" />
       <inertia
         ixx="1.15503164126153E-05"
-        ixy="-2.96411876568322E-09"
-        ixz="-1.64845302072192E-08"
+        ixy="-2.96411876568285E-09"
+        ixz="-1.64845302072194E-08"
         iyy="6.93803138202263E-06"
         iyz="1.56454773172938E-07"
         izz="9.57898906372991E-06" />
@@ -798,7 +798,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_rear_wheel_motor.STL" />
+          filename="package://model20/meshes/left_rear_wheel_motor.STL" />
       </geometry>
       <material
         name="">
@@ -812,7 +812,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_rear_wheel_motor.STL" />
+          filename="package://model20/meshes/left_rear_wheel_motor.STL" />
       </geometry>
     </collision>
   </link>
@@ -836,16 +836,16 @@
     name="left_rear_wheel">
     <inertial>
       <origin
-        xyz="0.0158391990185369 -2.42861286636753E-16 3.10862446895044E-15"
+        xyz="0.0158391990185369 -2.35922392732846E-16 3.10862446895044E-15"
         rpy="0 0 0" />
       <mass
         value="0.22822169800504" />
       <inertia
         ixx="0.0007892115763339"
-        ixy="1.808135598232E-21"
-        ixz="3.93109040544683E-18"
+        ixy="2.11360881898891E-21"
+        ixz="3.93127399226119E-18"
         iyy="0.000410429434291421"
-        iyz="-3.30739896123204E-19"
+        iyz="-3.31293590145732E-19"
         izz="0.00041042943429142" />
     </inertial>
     <visual>
@@ -854,7 +854,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_rear_wheel.STL" />
+          filename="package://model20/meshes/left_rear_wheel.STL" />
       </geometry>
       <material
         name="">
@@ -868,7 +868,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/left_rear_wheel.STL" />
+          filename="package://model20/meshes/left_rear_wheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -897,8 +897,8 @@
       <mass
         value="0.00051" />
       <inertia
-        ixx="5.31250000000001E-09"
-        ixy="-5.07617477469065E-24"
+        ixx="5.31250000000002E-09"
+        ixy="-5.08263712322622E-24"
         ixz="-1.57746134744007E-25"
         iyy="8.50000000000001E-09"
         iyz="-1.53500944455405E-25"
@@ -910,7 +910,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/imu.STL" />
+          filename="package://model20/meshes/imu.STL" />
       </geometry>
       <material
         name="">
@@ -924,7 +924,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/imu.STL" />
+          filename="package://model20/meshes/imu.STL" />
       </geometry>
     </collision>
   </link>
@@ -945,15 +945,15 @@
     name="right_rear_wheel_suspension">
     <inertial>
       <origin
-        xyz="0.00153023333982272 -0.00499966029225211 -6.66133814775094E-15"
+        xyz="0.00153023333982277 -0.00499966029225211 -6.64746035994312E-15"
         rpy="0 0 0" />
       <mass
         value="0.0239463719407107" />
       <inertia
         ixx="1.07207044697232E-06"
-        ixy="6.73779967955069E-21"
+        ixy="6.75268893057664E-21"
         ixz="1.17472711402629E-21"
-        iyy="5.97423909283023E-06"
+        iyy="5.97423909283024E-06"
         iyz="3.42916966819491E-22"
         izz="5.30127484486976E-06" />
     </inertial>
@@ -963,7 +963,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_rear_wheel_suspension.STL" />
+          filename="package://model20/meshes/right_rear_wheel_suspension.STL" />
       </geometry>
       <material
         name="">
@@ -977,7 +977,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_rear_wheel_suspension.STL" />
+          filename="package://model20/meshes/right_rear_wheel_suspension.STL" />
       </geometry>
     </collision>
   </link>
@@ -985,8 +985,8 @@
     name="right_rear_wheel_suspension_joint"
     type="prismatic">
     <origin
-      xyz="0.43301 -0.086381 -0.023668"
-      rpy="1.5708 -0.0058285 0" />
+      xyz="0.433012893967015 -0.0863808182699648 -0.0236675880115178"
+      rpy="1.5707963267949 -0.00582847831492541 0" />
     <parent
       link="base_link" />
     <child
@@ -1009,10 +1009,10 @@
         value="0.0411670033844286" />
       <inertia
         ixx="1.15503164126153E-05"
-        ixy="-2.96411876568358E-09"
-        ixz="-1.64845302071912E-08"
+        ixy="-2.96411876568295E-09"
+        ixz="-1.64845302071913E-08"
         iyy="6.93803138202262E-06"
-        iyz="1.56454773172921E-07"
+        iyz="1.56454773172922E-07"
         izz="9.5789890637299E-06" />
     </inertial>
     <visual>
@@ -1021,7 +1021,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_rear_wheel_motor.STL" />
+          filename="package://model20/meshes/right_rear_wheel_motor.STL" />
       </geometry>
       <material
         name="">
@@ -1035,7 +1035,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_rear_wheel_motor.STL" />
+          filename="package://model20/meshes/right_rear_wheel_motor.STL" />
       </geometry>
     </collision>
   </link>
@@ -1064,11 +1064,11 @@
       <mass
         value="0.22822169800504" />
       <inertia
-        ixx="0.0007892115763339"
-        ixy="-6.6040841977297E-21"
-        ixz="-1.31965339495281E-18"
+        ixx="0.000789211576333899"
+        ixy="-6.68033070601968E-21"
+        ixz="-1.31945473900855E-18"
         iyy="0.000410429434291421"
-        iyz="-3.67863762014584E-19"
+        iyz="-3.64488865115367E-19"
         izz="0.00041042943429142" />
     </inertial>
     <visual>
@@ -1077,7 +1077,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_rear_wheel.STL" />
+          filename="package://model20/meshes/right_rear_wheel.STL" />
       </geometry>
       <material
         name="">
@@ -1091,7 +1091,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/right_rear_wheel.STL" />
+          filename="package://model20/meshes/right_rear_wheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -1115,16 +1115,16 @@
     name="lidar">
     <inertial>
       <origin
-        xyz="0.00993962815441612 0.0348253901515027 0.00754155498812623"
+        xyz="0.00993962815441618 0.0348253901515027 0.0075415549881262"
         rpy="0 0 0" />
       <mass
         value="0.0730845730370577" />
       <inertia
         ixx="2.41250080302792E-05"
-        ixy="8.21520633180315E-09"
-        ixz="-1.04036431330035E-07"
+        ixy="8.21520633180286E-09"
+        ixz="-1.04036431330037E-07"
         iyy="4.14054979863134E-05"
-        iyz="-6.82811367309103E-07"
+        iyz="-6.82811367309102E-07"
         izz="1.95938297291199E-05" />
     </inertial>
     <visual>
@@ -1133,7 +1133,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/lidar.STL" />
+          filename="package://model20/meshes/lidar.STL" />
       </geometry>
       <material
         name="">
@@ -1147,7 +1147,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://model15/meshes/lidar.STL" />
+          filename="package://model20/meshes/lidar.STL" />
       </geometry>
     </collision>
   </link>
@@ -1156,7 +1156,7 @@
     type="fixed">
     <origin
       xyz="0.19191 -0.16763 0.16593"
-      rpy="3.14159265 0 1.5708" />
+      rpy="0 0 3.1415926535" />
     <parent
       link="base_link" />
     <child
@@ -1164,7 +1164,7 @@
     <axis
       xyz="0 0 0" />
   </joint>
-<transmission name="wheel_front_left_transmission">
+    <transmission name="wheel_front_left_transmission">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="left_front_wheel_joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
@@ -1254,10 +1254,10 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
    <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/model15</robotNamespace>
+      <robotNamespace>/model20</robotNamespace>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>
@@ -1267,7 +1267,7 @@
     <material>Gazebo/Orange</material>
   </gazebo>
 
- 
+
 <gazebo reference="left_front_wheel">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
@@ -1295,8 +1295,8 @@
     <fdir1>1 0 0</fdir1>
     <material>Gazebo/FlatBlack</material>
   </gazebo>
-  
-  
+
+
   <gazebo reference="left_front_wheel_suspension">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
@@ -1389,7 +1389,7 @@
       </plugin>
     </sensor>
   </gazebo>
-  <gazebo reference="camera2">
+    <gazebo reference="camera2">
     <sensor type="depth" name="realsense_R200">
       <always_on>true</always_on>
       <visualize>$(arg camera_visual)</visualize>
@@ -1437,7 +1437,7 @@
     <material>Gazebo/FlatBlack</material>
     <sensor type="ray" name="lds_lfcd_sensor">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>$(arg laser_visual)</visualize>
+      <!--<visualize>$(arg laser_visual)</visualize>-->
       <update_rate>5</update_rate>
       <ray>
         <scan>

@@ -100,10 +100,10 @@ int main (int argc, char **argv)
 
     ros::Subscriber sub = nh.subscribe("/segments", 10, decision_center);
 
-    pub_right_front_wheel = nh.advertise<std_msgs::Float64>("model16/right_front_wheel_velocity_controller/command", 10);
-    pub_left_front_wheel = nh.advertise<std_msgs::Float64>("model16/left_front_wheel_velocity_controller/command", 10);
-    pub_right_rear_wheel = nh.advertise<std_msgs::Float64>("model16/right_rear_wheel_velocity_controller/command", 10);
-    pub_left_rear_wheel = nh.advertise<std_msgs::Float64>("model16/left_rear_wheel_velocity_controller/command", 10);
+    pub_right_front_wheel = nh.advertise<std_msgs::Float64>("model20/right_front_wheel_velocity_controller/command", 10);
+    pub_left_front_wheel = nh.advertise<std_msgs::Float64>("model20/left_front_wheel_velocity_controller/command", 10);
+    pub_right_rear_wheel = nh.advertise<std_msgs::Float64>("model20/right_rear_wheel_velocity_controller/command", 10);
+    pub_left_rear_wheel = nh.advertise<std_msgs::Float64>("model20/left_rear_wheel_velocity_controller/command", 10);
      
     ros::Rate loop_rate(20);
 

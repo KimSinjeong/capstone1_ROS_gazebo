@@ -883,15 +883,15 @@ int main(int argc, char **argv)
 	ros::Subscriber sub1_2 = n.subscribe<core_msgs::ball_position>("/position_b", 1000, b_camera2_Callback);
 	ros::Subscriber sub2_2 = n.subscribe<core_msgs::ball_position>("/position_r", 1000, r_camera2_Callback);
 	ros::Subscriber sub5 = n.subscribe<core_msgs::robot_position>("/robot_position", 1000, global_Callback);
-	ros::Publisher pub_left_front_wheel= n.advertise<std_msgs::Float64>("/model16/left_front_wheel_velocity_controller/command", 10);
-	ros::Publisher pub_right_front_wheel= n.advertise<std_msgs::Float64>("/model16/right_front_wheel_velocity_controller/command", 10);
-	ros::Publisher pub_left_rear_wheel= n.advertise<std_msgs::Float64>("/model16/left_rear_wheel_velocity_controller/command", 10);
-	ros::Publisher pub_right_rear_wheel= n.advertise<std_msgs::Float64>("/model16/right_rear_wheel_velocity_controller/command", 10);
+	ros::Publisher pub_left_front_wheel= n.advertise<std_msgs::Float64>("/model20/left_front_wheel_velocity_controller/command", 10);
+	ros::Publisher pub_right_front_wheel= n.advertise<std_msgs::Float64>("/model20/right_front_wheel_velocity_controller/command", 10);
+	ros::Publisher pub_left_rear_wheel= n.advertise<std_msgs::Float64>("/model20/left_rear_wheel_velocity_controller/command", 10);
+	ros::Publisher pub_right_rear_wheel= n.advertise<std_msgs::Float64>("/model20/right_rear_wheel_velocity_controller/command", 10);
 
-	ros::Publisher sus1 = n.advertise<std_msgs::Float64>("/model16/left_front_wheel_suspension_controller/command", 10);
-	ros::Publisher sus2 = n.advertise<std_msgs::Float64>("/model16/right_front_wheel_suspension_controller/command", 10);
-	ros::Publisher sus3 = n.advertise<std_msgs::Float64>("/model16/left_rear_wheel_suspension_controller/command", 10);
-	ros::Publisher sus4 = n.advertise<std_msgs::Float64>("/model16/right_rear_wheel_suspension_controller/command", 10);
+	ros::Publisher sus1 = n.advertise<std_msgs::Float64>("/model20/left_front_wheel_suspension_controller/command", 10);
+	ros::Publisher sus2 = n.advertise<std_msgs::Float64>("/model20/right_front_wheel_suspension_controller/command", 10);
+	ros::Publisher sus3 = n.advertise<std_msgs::Float64>("/model20/left_rear_wheel_suspension_controller/command", 10);
+	ros::Publisher sus4 = n.advertise<std_msgs::Float64>("/model20/right_rear_wheel_suspension_controller/command", 10);
 
     while(ros::ok){
 		
@@ -1073,7 +1073,7 @@ int main(int argc, char **argv)
 					if(c1<350){
 						c1++;
 						std::cout << "detect mode, rotate"<<std::endl;
-						rotate_right_slow();
+						rotate_left_slow();
 						mode = 0;
 					}else{
 						mode = 17;

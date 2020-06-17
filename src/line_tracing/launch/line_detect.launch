@@ -1,4 +1,4 @@
 <launch>
-    <node pkg='line_tracing' type='line_detect_node' name='line_detect_node' output='screen'/>
+    <node pkg='line_tracing' type='line_detect_node' name='line_detect_node' output='log'/>
     <node pkg='line_tracing' type='line_detect_actuation' name='line_detect_actuation' output='screen'/>
 </launch>

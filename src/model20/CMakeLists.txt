@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-project(model15)
+project(model20)
 
 find_package(catkin REQUIRED)
 
