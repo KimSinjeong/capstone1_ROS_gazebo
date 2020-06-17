@@ -98,7 +98,7 @@ int main (int argc, char **argv) {
     ros::NodeHandle nh;
     image_transport::ImageTransport it(nh);
 
-    sleep(4);
+    sleep(5);
 
     image_transport::Subscriber sub = it.subscribe("/camera/rgb/image_raw", 1, imagegrabber);
     pub = nh.advertise<core_msgs::line_segments>("/segments", 100);
