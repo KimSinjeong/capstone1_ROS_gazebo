@@ -70,7 +70,7 @@ int r_size;
 int r_size2;
 
 bool start = 0;
-int mode = 0;
+int mode = -1;
 float vel_front_left = 0;
 float vel_front_right = 0;
 float vel_rear_left = 0;
@@ -398,7 +398,7 @@ bool is_target_close(){
 bool far_than_ball(){
 	float tmp;
 	distance_lidar = lidar_distance[0];
-	for(int i = 1; i<8; i++){
+	for(int i = 1; i<9; i++){
 		tmp = lidar_distance[i];
 		if(distance_lidar>tmp){
 			distance_lidar = tmp;
@@ -903,6 +903,34 @@ int main(int argc, char **argv)
 
 			//center of x =0
 			if(start && isenabled){
+				if(mode == -1){
+					if(sub_mode == 0){
+						if(detect_g && X_g>0){
+							sub_mode = 1;
+						}else{
+							rotate_left_tick_fast();
+							std::cout << "mode : -1, rotate"<<std::endl;
+						}
+					}else if(sub_mode == 1){
+						c++;
+						if(c<35){
+							set_vel(25,25,25,25);
+						}else{
+							c = 0;
+							sub_mode = 2;
+						}
+					}else if(sub_mode == 2){
+						c ++;
+						if(c<10){
+							rotate_left();
+							std::cout << "mode : -1, rotate"<<std::endl;
+						}else{
+							c = 0;
+							sub_mode = 0;
+							mode = 0;
+						}
+					}
+				}
 				if(detect_g){
 					goal_x = r_pose[0]+Y_g*cos(r_theta)+X_g*sin(r_theta);
 					goal_y = r_pose[1]+Y_g*sin(r_theta)-X_g*cos(r_theta);
@@ -1069,7 +1097,7 @@ int main(int argc, char **argv)
 					}
 
 				}
-				else if(mode < 2){ // when the blue ball is not detect
+				else if(mode < 2 && mode != -1){ // when the blue ball is not detect
 					if(c1<350){
 						c1++;
 						std::cout << "detect mode, rotate"<<std::endl;
@@ -1628,11 +1656,13 @@ int main(int argc, char **argv)
 								}
 							}
 						}else{
-							std::cout << "mode : 10, revolving"<<std::endl;
+							std::cout << "mode : 10, go little"<<std::endl;
 							if(rev_dir == 0){
-								revolving_left();
+								//revolving_left();
+								set_vel(25,25,25,25);
 							}else{
-								revolving_right();
+								//revolving_right();
+								set_vel(25,25,25,25);
 							}
 							if(c == 15){
 								flag_m2 = false;
@@ -1669,7 +1699,7 @@ int main(int argc, char **argv)
 				}else if(mode == 11){
 
 					c++;
-					if(c<40){
+					if(c<50){
 						std::cout << "mode : 11, go"<<std::endl;
 						go_with_ball();
 					}else{
