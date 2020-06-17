@@ -42,7 +42,7 @@ git init
 
 * Build the packages
 
-`catkin_make`
+`cd ~/catkin_ws && catkin_make`
 
 ## 3. Run
 
