@@ -114,7 +114,6 @@ int mode16_count = 0;
 bool is_target_close_obstacle;
 
 
-
 //imu
 float _gx, _gy, _gz, _ax, _ay, _az;
 float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;
@@ -373,7 +372,7 @@ bool is_target_close(){
 	bool target_flag = false;
 	is_target_close_obstacle = false;
 	target_closest();
-	if(distance_target<0.55){
+	if(distance_target<0.5){
 		normal = 1/distance_btw(lidar_x, lidar_y, gB_x, gB_y);
 		if(distance_btw(r_pose[0], r_pose[1], gB_x + 0.5*normal*(gB_y - lidar_y), gB_y - 0.5*normal*(gB_x - lidar_x))>distance_btw(r_pose[0], r_pose[1], gB_x - 0.5*normal*(gB_y - lidar_y), gB_y + 0.5*normal*(gB_x - lidar_x))){
 			target_flag = true;
@@ -386,7 +385,7 @@ bool is_target_close(){
 			target_y = gB_y - 0.5*normal*(gB_x - lidar_x);
 		}
 		target_closest();
-		if(distance_target<0.45){
+		if(distance_target<0.4){
 			is_target_close_obstacle = true;
 		}
 		return true;
@@ -719,7 +718,7 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 			}
 		}	
     }
-	if(front<0.38){
+	if(front<0.5){
 		detect_front = true;
 	}
 
@@ -733,10 +732,10 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 	if(behind < 0.35){
 		detect_behind =  true;
 	}
-	if(left<0.136){
+	if(left<0.137){
 		detect_left = true;
 	}
-	if(right<0.136){
+	if(right<0.137){
 		detect_right = true;
 	}
 	if(left<0.25){
@@ -745,10 +744,10 @@ void lidar_Callback(const sensor_msgs::LaserScan::ConstPtr& scan)
 	if(right<0.25){
 		detect_right2 = true;
 	}
-	if(fr<0.35){
+	if(fr<0.47){
 		detect_fr = true;
 	}
-	if(fl<0.35){
+	if(fl<0.47){
 		detect_fl = true;
 	}
 	if(!(detect_front || detect_fl || detect_fr)){
@@ -1369,16 +1368,6 @@ int main(int argc, char **argv)
 								rotate_right_tick_fast();
 							}
 						}
-						if(mode16_count == 4){
-							mode = 0;
-							sub_mode = 0;
-							start_going = 0;
-							myStop();
-							flag =1;
-							rot_left = is_turn_left(r_theta, goal_x-r_pose[0], goal_y-r_pose[1]);
-							c = 0;
-							mode16_count = 0;
-						}
 					}else if(sub_mode == 1){
 						std::cout<<"l_x = "<<target_x-r_pose[0] <<", l_y = "<<target_y-r_pose[1]<<std::endl;
 						if(distance_btw(r_pose[0], r_pose[1], target_x, target_y)<0.12 || flag_16){
@@ -1403,16 +1392,6 @@ int main(int argc, char **argv)
 							std::cout << "mode 16, go straight"<<std::endl;
 							go();
 						}
-						if(mode16_count == 4){
-							mode = 0;
-							sub_mode = 0;
-							start_going = 0;
-							myStop();
-							flag =1;
-							rot_left = is_turn_left(r_theta, goal_x-r_pose[0], goal_y-r_pose[1]);
-							c = 0;
-							mode16_count = 0;
-						}
 					}else if(sub_mode == 2){
 						if(abs(1-(DiffandNorm(gB_x, gB_y,r_pose[0],r_pose[1], 0)*cos(r_theta)+DiffandNorm(gB_x, gB_y,r_pose[0],r_pose[1], 1)*sin(r_theta)))<0.015){
 							sub_mode = 3;
@@ -1430,7 +1409,6 @@ int main(int argc, char **argv)
 							if((detect_b && X[0]> -0.007) || (detect_b2 && X2[0]>-0.007)){
 								sub_mode = 4;
 								myStop();
-								mode16_count = 0;
 							}else{
 								std::cout << "mode : 16, positive"<<std::endl;
 								rotate_left_tick();
@@ -1741,9 +1719,9 @@ int main(int argc, char **argv)
 						}else{
 							rotate_right();
 						}
-					}else if(c<40){
+					}else if(c<37){
 						std::cout << "mode : 12, back"<<std::endl;
-						set_vel(-25,-25,-25,-25);
+						set_vel(-20,-20,-20,-20);
 					}else{
 						c = 0;
 						flag_m12 = false;
@@ -1878,7 +1856,7 @@ int main(int argc, char **argv)
 					}
 				}
 
-				if((((mode < 4 || (mode == 6 && sub_mode !=1 && sub_mode != 2) || mode == 10 || (mode == 16 && sub_mode <2) || mode == 17 || (mode == 18 && sub_mode == 2)) && (((detect_r && Y_r[0]<0.37 && abs(X_r[0])<0.25) || (detect_r2 && Y_r2[0]<0.37 && abs(X_r2[0]<0.25)))|| detect_front || detect_fl || detect_fr)) || (mode == 5 && (detect_fl || detect_fr))) && (!detect_g || (detect_g && Y_g >0.6)) && !flag_m2){ // interrupt if the red ball is in front of the robot without blue ball -> go to mode 2
+				if((((mode < 4 || (mode == 6 && sub_mode !=1 && sub_mode != 2) || mode == 10 || (mode == 16 && sub_mode <2) || mode == 17 || (mode == 18 && sub_mode == 2)) && (((detect_r && Y_r[0]<0.34 && abs(X_r[0])<0.25) || (detect_r2 && Y_r2[0]<0.34 && abs(X_r2[0]<0.25)))|| detect_front || detect_fl || detect_fr)) || (mode == 5 && (detect_fl || detect_fr))) && (!detect_g || (detect_g && Y_g >0.6)) && !flag_m2){ // interrupt if the red ball is in front of the robot without blue ball -> go to mode 2
 					sub_mode = 0;
 					breaking = 0;
 					start_going = 0;
@@ -1886,9 +1864,6 @@ int main(int argc, char **argv)
 					flag_20 = false;
 					flag_m20 = false;
 					flag = 1;
-					if(mode == 16 && (sub_mode == 0 || sub_mode == 1)){
-						mode16_count++;
-					}
 					if(mode != 2 && mode !=3 && mode!=10){
 						store_mode = mode;
 					}
