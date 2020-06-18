@@ -1116,7 +1116,7 @@
     <inertial>
       <origin
         xyz="0.00993962815441618 0.0348253901515027 0.0075415549881262"
-        rpy="0 0 0" />
+        rpy="1.5707 0 0" />
       <mass
         value="0.0730845730370577" />
       <inertia
@@ -1129,8 +1129,8 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+        xyz="-0.02 0 0"
+        rpy="1.5707 0 0" />
       <geometry>
         <mesh
           filename="package://model20/meshes/lidar.STL" />
@@ -1143,8 +1143,8 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+        xyz="-0.02 0 0"
+        rpy="1.5707 0 0" />
       <geometry>
         <mesh
           filename="package://model20/meshes/lidar.STL" />
@@ -1155,8 +1155,8 @@
     name="lidar_joint"
     type="fixed">
     <origin
-      xyz="0.19191 -0.16763 0.16593"
-      rpy="0 0 3.1415926535" />
+      xyz="0.18911 -0.18 0.17"
+      rpy="0 0 -3.1415926535" />
     <parent
       link="base_link" />
     <child
