@@ -63,6 +63,7 @@ float Y_r[10];
 float X_r2[10];
 float Y_r2[10];
 
+
 float X_g;
 float Y_g;
 
@@ -427,6 +428,7 @@ void camera2global(){
 	gB_x = r_pose[0]+Y[0]*cos(r_theta)+X[0]*sin(r_theta);
 	gB_y = r_pose[1]+Y[0]*sin(r_theta)-X[0]*cos(r_theta);
 }
+
 
 void set_vel(float left_f, float right_f, float left_r, float right_r){
 	vel_front_left = left_f;
@@ -936,9 +938,12 @@ int main(int argc, char **argv)
 					goal_x = r_pose[0]+Y_g*cos(r_theta)+X_g*sin(r_theta);
 					goal_y = r_pose[1]+Y_g*sin(r_theta)-X_g*cos(r_theta);
 					set_center();
+					
 				}
 				if(detect_b || detect_b2){
 					if(mode == 0){ // mode 0 : rotate in place for matching the direction to the ball
+						camera2global();
+						rot_left = is_turn_left(r_theta, gB_x-r_pose[0], gB_y-r_pose[1]);
 						if((detect_b && X[0]<0) || (detect_b2 && X2[0]<0)){ // if the ball is at the right side
 							if((detect_b && X[0]>-0.008) || (detect_b2 && X2[0]>-0.008)){
 								mode = 1;
@@ -1102,7 +1107,11 @@ int main(int argc, char **argv)
 					if(c1<350){
 						c1++;
 						std::cout << "detect mode, rotate"<<std::endl;
-						rotate_left_slow();
+						if(rot_left){
+							rotate_left_slow();
+						}else{
+							rotate_right_slow();
+						}
 						mode = 0;
 					}else{
 						mode = 17;
@@ -1586,6 +1595,8 @@ int main(int argc, char **argv)
 								myStop();
 								breaking = 0;
 								c = 0;
+								camera2global();
+								rot_left = is_turn_left(r_theta, gB_x-r_pose[0], gB_y-r_pose[1]);
 								if(store_mode == 16){
 									mode = 16;
 									rot_left = is_turn_left(r_theta, target_x-r_pose[0], target_y-r_pose[1]);
@@ -1705,6 +1716,8 @@ int main(int argc, char **argv)
 									flag = 1;
 									breaking = 0;
 									myStop();
+									camera2global();
+									rot_left = is_turn_left(r_theta, gB_x-r_pose[0], gB_y-r_pose[1]);
 									if(store_mode == 16){
 										mode = 16;
 										rot_left = is_turn_left(r_theta, target_x-r_pose[0], target_y-r_pose[1]);
@@ -1719,7 +1732,6 @@ int main(int argc, char **argv)
 						}
 					}
 				}else if(mode == 11){
-
 					c++;
 					if(c<50){
 						std::cout << "mode : 11, go"<<std::endl;
